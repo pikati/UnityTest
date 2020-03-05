@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
         var pos = transform.position;
         pos.x += move.x;
         transform.position = pos;
-
+        Debug.Log(move.x);
         InWater();
     }
 
@@ -46,7 +46,7 @@ public class PlayerController : MonoBehaviour
         }
         var t = Time.deltaTime;
         var move = inputValue.Get<Vector2>();
-        this.move = move * 3.0f * t;
+        this.move = move * 0.03f;
         //Debug.Log("time  :" + t);
         //Debug.Log("move.x:" + move.x);
         //Debug.Log("Move" + inputValue.Get<Vector2>());
@@ -91,14 +91,12 @@ public class PlayerController : MonoBehaviour
             gameObject.transform.position = newPos;
             rb.velocity = Vector3.zero;
             rb.AddForce(new Vector3(0, 0, 0), ForceMode.Acceleration);
-            time += Time.deltaTime;
-            if(time >= 5.0f)
-            {
-                Vector3 resetPos = start.transform.position;
-                resetPos.y += 2.0f;
-                gameObject.transform.position = resetPos;
-                time = 0;
-            }
+            
+               Vector3 resetPos = start.transform.position;
+               resetPos.y += 2.0f;
+               gameObject.transform.position = resetPos;
+               time = 0;
+            
             targetPos = gameObject.transform.position;
             SetEnemysTarget();
         }
